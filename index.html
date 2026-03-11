@@ -4,23 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Company</title>
+        <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/scittle@0.6.15/dist/scittle.js"></script>
     </head>
     <body>
         <a href="employee-form">Insert employee</a>
-        <table>
-            <thead>
-                <th>id</th>
-                <th>name</th>
-                <th>role</th>
-                <th>salary</th>
-                <th>added_date</th>
-                <th>Action</th>
-            </thead>
-            <tbody id="employee-rows">
-                <!-- ROWS -->
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="column-label">id</div>
+            <div class="column-label">name</div>
+            <div class="column-label">role</div>
+            <div class="column-label">salary</div>
+            <div class="column-label">added_date</div>
+            <div class="column-label"></div>
+            <div class="column-label"></div>
+        </div>
+        <!-- FORMS -->
         <a href="?page=x">Refresh</a>
     </body>
     <script type="application/x-scittle" src="program.cljs"></script>

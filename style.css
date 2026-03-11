@@ -1,0 +1,9 @@
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.column-label {
+    font-weight: bold;
+    text-align: center;
+}

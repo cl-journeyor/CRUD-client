@@ -12,7 +12,7 @@
 (defn fetch-row-page-async
   [page]
   (-> (js/fetch (str "http://localhost:5070/?page=" page))
-      (.then #(.text %))))
+      (.then #(.json %))))
 
 (defn new-elem
   ([name]
@@ -26,12 +26,6 @@
   [id]
   (.getElementById js/document id))
 
-(defn render-rows!
-  [rows]
-  (doseq [row rows]
-    (let [idTd (new-elem "td" (.-id row))
-          nameTd (new-elem "td" (.-name row))
-          ])))
 
 
 
