@@ -12,7 +12,28 @@
 (defn fetch-row-page-async
   [page]
   (-> (js/fetch (str "http://localhost:5070/?page=" page))
-      (.then #(.json %))))
+      (.then #(.text %))))
+
+(defn new-elem
+  ([name]
+   (.createElement js/document name))
+  ([name txt]
+   (let [elem (new-elem name)]
+     (set! (.-textContent elem) txt)
+     elem)))
+
+(defn get-elem
+  [id]
+  (.getElementById js/document id))
+
+(defn render-rows!
+  [rows]
+  (doseq [row rows]
+    (let [idTd (new-elem "td" (.-id row))
+          nameTd (new-elem "td" (.-name row))
+          ])))
+
+
 
 ;;; Example code.
 (-> (.resolve js/Promise (fetch-row-page-async (get-page-number)))
