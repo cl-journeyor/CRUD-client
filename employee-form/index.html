@@ -8,7 +8,27 @@
         <script src="https://cdn.jsdelivr.net/npm/scittle@0.6.15/dist/scittle.js"></script>
     </head>
     <body>
-        
+        <a href="..">Home</a>
+        <h1 id="title"></h1>
+        <form id="form">
+            <label>
+                Name:
+                <input name="name" type="text" required>
+            </label>
+            <br>
+            <label>
+                Role:
+                <input name="role" type="text" required>
+            </label>
+            <br>
+            <label>
+                Salary:
+                <input name="salary" type="number" step="any" min="0" required>
+            </label>
+            <br>
+            <button>Submit</button>
+        </form>
     </body>
-    <script type="application/x-scittle" src="program.cljs"></script>
+    <script type="application/x-scittle" src="../utils.cljs"></script>
+    <script type="application/x-scittle" src="core.cljs"></script>
 </html>
