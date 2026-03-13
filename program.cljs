@@ -58,9 +58,10 @@
                      (.appendChild (new-elem "button" "Update")))
                    (doto (new-elem "div")
                      (.appendChild delete-btn))]
-            row (let [div (new-elem "div")]
-                  (set! (.-className div) "employee-row")
-                  div)]
+            row (let [form (new-elem "form")]
+                  (set! (.-className form) "employee-row")
+                  (set! (.-action form) "employee-form")
+                  form)]
         (doseq [cell cells]
           (.appendChild row cell))
         (.appendChild (get-elem "body") row)))))
