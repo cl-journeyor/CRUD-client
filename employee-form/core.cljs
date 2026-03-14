@@ -8,6 +8,12 @@
   [msg]
   (js/alert msg))
 
+(defn consume-submit-result!
+  [result]
+  (if (= result "OK")
+    (set! (.-href js/location) "..")
+    (alert-error! result)))
+
 (defn fill-form!
   [params]
   (let [names ["id" "name" "role" "salary" "added-date"]]
@@ -23,14 +29,22 @@
                                  "body" (.stringify js/JSON req)
                                  "headers" headers))
         (.then #(.json %))
-        (.then #(if (= % "OK")
-                  (set! (.-href js/location) "..")
-                  (alert-error! %)))
+        (.then consume-submit-result!)
         (.catch alert-error!))))
 
 (defn handle-update!
   []
-  )
+  (let [req (js-obj "id" (.-value (get-input "id"))
+                    "name" (.-value (get-input "name"))
+                    "role" (.-value (get-input "role"))
+                    "salary" (.-value (get-input "salary"))
+                    "added_date" (.-value (get-input "added-date")))]
+    (-> (js/fetch server (js-obj "method" "PUT"
+                                 "body" (.stringify js/JSON req)
+                                 "headers" headers))
+        (.then #(.json %))
+        (.then consume-submit-result!)
+        (.catch alert-error!))))
 
 (defn load-app!
   []
