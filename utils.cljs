@@ -1,3 +1,5 @@
+(def headers (js-obj "Content-Type" "application/json"))
+
 (defn get-elem
   [id]
   (.getElementById js/document id))

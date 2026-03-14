@@ -1,5 +1,3 @@
-(def headers (js-obj "Content-Type" "application/json"))
-
 (defn get-input
   [name]
   (.querySelector js/document (str "input[name='" name "']")))

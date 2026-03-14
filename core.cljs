@@ -9,6 +9,21 @@
       1
       unsafe-page-number)))
 
+(defn handle-delete!
+  [emp]
+  (letfn [(alert-error!
+            [msg]
+            (js/alert msg))]
+    (when (js/confirm (str "Delete employee " (.-id emp) "?"))
+      (-> (js/fetch server (js-obj "method" "DELETE"
+                                   "body" (.stringify js/JSON emp)
+                                   "headers" headers))
+          (.then #(.json %))
+          (.then #(if (= % "OK")
+                    (.reload js/location)
+                    (alert-error! %)))
+          (.catch alert-error!)))))
+
 (defn render-employees!
   [emps]
   (letfn [(new-prop-cell
@@ -21,7 +36,7 @@
                          (.addEventListener
                           btn
                           "click"
-                          #(println (.-id emp)))
+                          (fn [] (handle-delete! emp)))
                          btn)
             cells [(new-prop-cell "id" (.-id emp))
                    (new-prop-cell "name" (.-name emp))
