@@ -46,7 +46,7 @@
 
 (defn load-app!
   []
-  (-> (js/fetch (str "http://localhost:5070/?page=" (get-page-number)))
+  (-> (js/fetch (str server "/?page=" (get-page-number)))
       (.then #(.json %))
       (.then #(if (instance? js/Object %)
                 (render-employees! (.-employees %))

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Company</title>
+        <link rel="stylesheet" href="../index.css">
         <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/scittle@0.6.15/dist/scittle.js"></script>
     </head>
@@ -11,6 +12,7 @@
         <a href="..">Home</a>
         <h1 id="title"></h1>
         <form id="form">
+            <input name="id" type="hidden">
             <label>
                 Name:
                 <input name="name" type="text" required>
@@ -26,9 +28,11 @@
                 <input name="salary" type="number" step="any" min="0" required>
             </label>
             <br>
+            <input name="added-date" type="hidden">
             <button>Submit</button>
         </form>
     </body>
+    <script type="application/x-scittle" src="../config.cljs"></script>
     <script type="application/x-scittle" src="../utils.cljs"></script>
     <script type="application/x-scittle" src="core.cljs"></script>
 </html>

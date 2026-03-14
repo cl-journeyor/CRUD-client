@@ -1,16 +1,32 @@
+(def headers (js-obj "Content-Type" "application/json"))
+
 (defn get-input
   [name]
   (.querySelector js/document (str "input[name='" name "']")))
 
+(defn alert-error!
+  [msg]
+  (js/alert msg))
+
 (defn fill-form!
   [params]
-  (let [names ["name" "role" "salary"]]
+  (let [names ["id" "name" "role" "salary" "added-date"]]
     (doseq [name names]
       (set! (.-value (get-input name)) (.get params name)))))
 
 (defn handle-insert!
   []
-  ())
+  (let [req (js-obj "name" (.-value (get-input "name"))
+                    "role" (.-value (get-input "role"))
+                    "salary" (.-value (get-input "salary")))]
+    (-> (js/fetch server (js-obj "method" "POST"
+                                 "body" (.stringify js/JSON req)
+                                 "headers" headers))
+        (.then #(.json %))
+        (.then #(if (= % "OK")
+                  (set! (.-href js/location) "..")
+                  (alert-error! %)))
+        (.catch alert-error!))))
 
 (defn handle-update!
   []
