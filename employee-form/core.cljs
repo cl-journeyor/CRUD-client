@@ -1,6 +1,12 @@
+(defn get-input
+  [name]
+  (.querySelector js/document (str "input[name='" name "']")))
+
 (defn fill-form!
   [params]
-  )
+  (let [names ["name" "role" "salary"]]
+    (doseq [name names]
+      (set! (.-value (get-input name)) (.get params name)))))
 
 (defn handle-insert!
   []
@@ -17,7 +23,7 @@
                    js/URLSearchParams.)
         id (.get params "id")]
     (set!
-     (.textContent (get-elem "title"))
+     (.-textContent (get-elem "title"))
      (if id (str "Update employee " id) "Insert employee"))
     (.addEventListener
      (get-elem "form")
