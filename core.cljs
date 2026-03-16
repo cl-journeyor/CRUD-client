@@ -53,19 +53,26 @@
                   form)]
         (doseq [cell cells]
           (.appendChild row cell))
-        (.appendChild (get-elem "body") row)))))
+        (.appendChild (get-elem "table") row)))))
 
 (defn render-error!
   [msg]
-  (.appendChild (get-elem "body") (new-elem "h1" msg)))
+  (.appendChild (get-elem "table") (new-elem "h1" msg)))
 
 (defn load-app!
   []
-  (-> (js/fetch (str server "/?page=" (get-page-number)))
-      (.then #(.json %))
-      (.then #(if (instance? js/Object %)
-                (render-employees! (.-employees %))
-                (render-error! %)))
-      (.catch render-error!)))
+  (let [page-number (get-page-number)
+        page-number-input (get-elem "page-number")]
+    (set! (.-value page-number-input) page-number)
+    (.addEventListener
+     page-number-input
+     "change"
+     #(set! (.-href js/location) (str "?page=" (-> % .-target .-value))))
+    (-> (js/fetch (str server "/?page=" page-number))
+        (.then #(.json %))
+        (.then #(if (instance? js/Object %)
+                  (render-employees! (.-employees %))
+                  (render-error! %)))
+        (.catch render-error!))))
 
 (load-app!)
